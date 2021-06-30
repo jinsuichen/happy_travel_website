@@ -3,7 +3,7 @@ This is a simple JavaWeb application.
 
 To enhance basic knowledge of web and improve comprehensive ability, I develop this website.
 
-The technologies used are as following:
+The technologies used are as follows:
 <hr>
 
 #### web layer
