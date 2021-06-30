@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" >
+<html lang="zh-cn">
 <!--
     初步实现了注册表单的美化和检验。
     存在以下问题：
@@ -7,6 +7,7 @@
     2. 表单检验的方法重复，可进一步抽离
     3. 表单提示信息使用info-text未定义标签，且布局不合理
     4. 标签id、js变量、js函数命名混乱
+    5. 没有使用验证码
 -->
 <head>
     <meta charset="utf-8">
@@ -27,19 +28,6 @@
 
     <!--表单校验-->
     <script>
-        /*
-        1.用户名：单词 8-20
-        2.密码：单词 8-20
-        3.email：正则
-        4.姓名：非空
-        5.手机：正则
-        6.出生日期：非空
-        7.验证码：非空
-        */
-
-        // 表单提交时，调用所有
-        //失去焦点时，调用对应的方法
-
 
         // 26个英文字母组成
         function checkUsername() {
@@ -47,10 +35,10 @@
             var reg_username = /^[A-Za-z]+$/;
             var flag = reg_username.test(userName);
             var div = $("#username_div");
-            if(flag){
+            if (flag) {
                 div.addClass("has-success");
                 div.removeClass("has-error");
-            }else{
+            } else {
                 div.removeClass("has-success");
                 div.addClass("has-error");
             }
@@ -63,10 +51,10 @@
             var reg_psw = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
             var flag = reg_psw.test(passWord);
             var div = $("#psw_div");
-            if(flag){
+            if (flag) {
                 div.addClass("has-success");
                 div.removeClass("has-error");
-            }else{
+            } else {
                 div.removeClass("has-success");
                 div.addClass("has-error");
             }
@@ -78,12 +66,12 @@
         function checkRepassword() {
             var repassWprd = $("#repsw").val();
             var passWord = $("#psw").val();
-            var flag =repassWprd  === passWord;
+            var flag = repassWprd === passWord;
             var div = $("#repsw_div");
-            if(flag){
+            if (flag) {
                 div.addClass("has-success");
                 div.removeClass("has-error");
-            }else{
+            } else {
                 div.removeClass("has-success");
                 div.addClass("has-error");
             }
@@ -94,16 +82,17 @@
         // 常规邮箱 ：只允许英文字母、数字、下划线、英文句号、以及中划线组成
         // ^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$
 
+        //含有中文的邮箱
         //名称允许汉字、字母、数字，域名只允许英文域名
         function checkEmail() {
             var email = $("#email").val();
             var reg_email = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
             var flag = reg_email.test(email);
             var div = $("#email_div");
-            if(flag){
+            if (flag) {
                 div.addClass("has-success");
                 div.removeClass("has-error");
-            }else{
+            } else {
                 div.removeClass("has-success");
                 div.addClass("has-error");
             }
@@ -112,13 +101,9 @@
 
         /*
         1、不能有特殊字符和数字；
-
         2、可以输入英文，可以有空格，可以输入英文名字中的点；
-
         3、可以输入汉字；
-
         4、中文英文不能同时出现；
-
         5、长度在1-20；
         */
         function checkRealName() {
@@ -126,10 +111,10 @@
             var reg_realName = /^([\u4e00-\u9fa5]{1,20}|[a-zA-Z\.\s]{1,20})$/;
             var flag = reg_realName.test(realName);
             var div = $("#real_name_div");
-            if(flag){
+            if (flag) {
                 div.addClass("has-success");
                 div.removeClass("has-error");
-            }else{
+            } else {
                 div.removeClass("has-success");
                 div.addClass("has-error");
             }
@@ -142,25 +127,26 @@
             var reg_tel = /^([1]\d{10}|([\(（]?0[0-9]{2,3}[）\)]?[-]?)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?)$/;
             var flag = reg_tel.test(tel);
             var div = $("#tel_div");
-            if(flag){
+            if (flag) {
                 div.addClass("has-success");
                 div.removeClass("has-error");
-            }else{
+            } else {
                 div.removeClass("has-success");
                 div.addClass("has-error");
             }
             return flag;
         }
 
+
         function checkBirthday() {
             var birthday = $("#birthday").val();
-            var flag =  birthday != null && birthday !== "" && birthday !== undefined;
+            var flag = birthday != null && birthday !== "" && birthday !== undefined;
             var div = $("#birthday_div");
 
-            if(flag){
+            if (flag) {
                 div.addClass("has-success");
                 div.removeClass("has-error");
-            }else{
+            } else {
                 div.removeClass("has-success");
                 div.addClass("has-error");
             }
@@ -175,56 +161,44 @@
 
         }*/
 
+
+        // 入口函数
         $(function () {
 
+
+            // 点击提交按钮时
             $("#registerForm").submit(function () {
-                /*var flag = true;
-                flag &= checkUsername();
-                flag &= checkPassword();
-                flag &= checkRepassword();
-                flag &= checkTel();
-                flag &= checkRealName();
-                flag &= checkEmail();
-                flag &= checkBirthday();
-                return flag;*/
-                return checkUsername() && checkPassword() && checkRepassword() && checkTel()
-                    && checkRealName() && checkEmail() && checkBirthday();
-            })
+                if (checkUsername() && checkPassword() && checkRepassword() && checkTel()
+                    && checkRealName() && checkEmail() && checkBirthday()) {
 
-            $("#username").blur(checkUsername);
-
-            $("#psw").blur(checkPassword);
-
-            $("#repsw").blur(checkRepassword);
-
-            $("#email").blur(checkEmail);
-
-            $("#real_name").blur(checkRealName);
-
-            $("#tel").blur(checkTel);
-
-            $("#birthday").blur(checkBirthday);
+                    //此处使用serialize将表单进行序列化，处理为字符串
+                    $.post("registerUserServlet", $(this).serialize(), function (data){
+                        //在回调函数中处理服务器返回的数据
 
 
-            /*$("#op1").blur(checkGender());
-            $("#op2").blur(checkGender());*/
-
-            $("#test").click(function (){
-                var op1 = $("#op1");
-                var op2 = $("#op2");
-                if(op1.attr("checked")){
-                    alert("ok")
+                    });
                 }
             })
+
+            // 各个输入框离焦时进行表单检验
+            $("#username").blur(checkUsername);
+            $("#psw").blur(checkPassword);
+            $("#repsw").blur(checkRepassword);
+            $("#email").blur(checkEmail);
+            $("#real_name").blur(checkRealName);
+            $("#tel").blur(checkTel);
+            $("#birthday").blur(checkBirthday);
+
         })
     </script>
 
 
     <style>
+         /*布局使用*/
         /**{
             border: 1px solid red;
         }*/
-        info-text{
+        info-text {
             font-size: 4px;
             color: #777777;
             font-family: "Microsoft YaHei UI Light";
@@ -238,39 +212,53 @@
 
     <form class="col-xs-4" id="registerForm">
         <div class="form-group" id="username_div">
-            <label for="username" class="control-label">用户名 <info-text>由26个英文字母组成</info-text> </label>
-            <input type="text" class="form-control" id="username" placeholder="请输入昵称" name="username">
+            <label for="username" class="control-label">用户名
+                <info-text>由26个英文字母组成,长度不限</info-text>
+            </label>
+            <input type="text" class="form-control" id="username" placeholder="请输入昵称" name="userName">
 
 
         </div>
         <div class="form-group" id="psw_div">
-            <label for="psw"  class="control-label">密码 <info-text>必须同时含有数字和字母，6-18位</info-text></label>
+            <label for="psw" class="control-label">密码
+                <info-text>必须同时含有数字和字母，6-18位</info-text>
+            </label>
             <input type="password" class="form-control" id="psw" placeholder="请输入密码" name="psw">
         </div>
 
         <div class="form-group " id="repsw_div">
-            <label for="repsw" class="control-label">确认密码 <info-text>请重复密码</info-text></label>
+            <label for="repsw" class="control-label">确认密码
+                <info-text>请重复密码</info-text>
+            </label>
             <input type="password" class="form-control" id="repsw" placeholder="请重复输入密码" name="repsw">
         </div>
         <div class="form-group" id="email_div">
-            <label for="email" class="control-label">邮箱 <info-text>请输入真实邮箱</info-text></label>
+            <label for="email" class="control-label">邮箱
+                <info-text>请输入真实邮箱</info-text>
+            </label>
             <input type="email" class="form-control" id="email" placeholder="请输入邮箱" name="email">
         </div>
         <div class="form-group" id="real_name_div">
-            <label for="real_name" class="control-label">姓名 <info-text>请输入真实姓名</info-text></label>
+            <label for="real_name" class="control-label">姓名
+                <info-text>请输入真实姓名</info-text>
+            </label>
             <input type="text" class="form-control" id="real_name" placeholder="请输入邮箱" name="realName">
         </div>
         <div class="form-group" id="tel_div">
-            <label for="tel" class="control-label">电话 <info-text>请输入真实电话</info-text></label>
+            <label for="tel" class="control-label">电话
+                <info-text>请输入真实电话</info-text>
+            </label>
             <input type="tel" class="form-control" id="tel" placeholder="请输入电话" name="tel">
         </div>
         <div class="form-group" id="birthday_div">
-            <label for="birthday" class="control-label">生日 <info-text>请输入真实生日</info-text></label>
+            <label for="birthday" class="control-label">生日
+                <info-text>请输入真实生日</info-text>
+            </label>
             <input type="date" class="form-control" id="birthday" name="birthday">
         </div>
         <div id="gender_div">
-            <label class="radio-inline" >
-                <input type="radio" name="gender" id="op1" value="male" > <strong>男</strong>
+            <label class="radio-inline">
+                <input type="radio" name="gender" id="op1" value="male"> <strong>男</strong>
             </label>
             <label class="radio-inline">
                 <input type="radio" name="gender" id="op2" value="female"> <strong>女</strong>
@@ -284,7 +272,8 @@
 
 </div>
 
-<input type="button" value="test" id="test">
+<!--for test-->
+<!--<input type="button" value="test" id="test">-->
 
 </body>
 </html>
