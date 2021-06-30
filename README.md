@@ -1,7 +1,7 @@
 # happy_travel_website
 This is a simple JavaWeb application.
 
-To enhance basic knowledge of web and improve comprehensive ability, development this website.
+To enhance basic knowledge of web and improve comprehensive ability, I develop this website.
 
 The technologies used are as following:
 <hr>
