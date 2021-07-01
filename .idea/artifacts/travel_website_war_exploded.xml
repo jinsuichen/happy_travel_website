@@ -1,6 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="travel_website:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/travel_website_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/travel_website</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>travel_website</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -21,11 +28,16 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.3" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.3" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.3" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4.7" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Maven: javax.mail:javax.mail-api:1.6.2" />
           <element id="library" level="project" name="Maven: redis.clients:jedis:3.6.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-pool2:2.9.0" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/travel_website/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="travel_website/web/Web" />
     </root>
