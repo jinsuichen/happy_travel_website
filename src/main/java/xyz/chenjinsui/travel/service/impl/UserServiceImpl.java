@@ -4,6 +4,10 @@ import xyz.chenjinsui.travel.dao.UserDao;
 import xyz.chenjinsui.travel.dao.impl.UserDaoImpl;
 import xyz.chenjinsui.travel.domain.User;
 import xyz.chenjinsui.travel.service.UserService;
+import xyz.chenjinsui.travel.util.MailUtils;
+import xyz.chenjinsui.travel.util.UuidUtil;
+
+import java.util.Locale;
 
 public class UserServiceImpl implements UserService {
 
@@ -25,10 +29,24 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+        //设置为一激活码
+        user.setCode(UuidUtil.getUuid());
+
+        //设置激活状态(未激活)
+        user.setStatus("N");
+
         //2.保存用户信息
         userDao.save(user);
-        return true;
 
+
+
+        //发送激活邮件
+        // TODO 部署项目时更改链接 或 抽取为配置文件
+        String content = "<a href='http://localhost/travel_website_war/activeUserSer?code=" + user.getCode() + "'>点击激活【快乐旅游网】</a>";
+        System.out.println("待发送： " +user.getEmail()+" " +content);
+        MailUtils.sendMail(user.getEmail(), content, "快乐旅游网-激活邮件");
+        System.out.println("============");
+        return true;
 
     }
 }

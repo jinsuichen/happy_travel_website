@@ -8,12 +8,11 @@ public class User {
     private String psw;
     private String email;
     private String realName;
-
-
     private String tel;
-    private char gender;
+    private String gender;
     private String birthday;
-
+    private String status; //激活状态
+    private String code; //激活码
 
     public String getUserName() {
         return userName;
@@ -25,14 +24,6 @@ public class User {
 
     public String getPsw() {
         return psw;
-    }
-
-    public char getGender() {
-        return gender;
-    }
-
-    public void setGender(char gender) {
-        this.gender = gender;
     }
 
     public void setPsw(String psw) {
@@ -63,6 +54,14 @@ public class User {
         this.tel = tel;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getBirthday() {
         return birthday;
     }
@@ -71,28 +70,19 @@ public class User {
         this.birthday = birthday;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                ", psw='" + psw + '\'' +
-                ", email='" + email + '\'' +
-                ", realName='" + realName + '\'' +
-                ", tel='" + tel + '\'' +
-                ", birthday=" + birthday +
-                '}';
+    public String getStatus() {
+        return status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userName.equals(user.userName);
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userName);
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
