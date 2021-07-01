@@ -8,8 +8,11 @@ public class User {
     private String psw;
     private String email;
     private String realName;
+
+
     private String tel;
-    private Date birthday;
+    private char gender;
+    private String birthday;
 
 
     public String getUserName() {
@@ -22,6 +25,14 @@ public class User {
 
     public String getPsw() {
         return psw;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
     }
 
     public void setPsw(String psw) {
@@ -52,11 +63,11 @@ public class User {
         this.tel = tel;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

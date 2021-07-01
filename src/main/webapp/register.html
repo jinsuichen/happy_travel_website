@@ -174,7 +174,7 @@
                     //此处使用serialize将表单进行序列化，处理为字符串
                     $.post("registerUserServlet", $(this).serialize(), function (data){
                         //在回调函数中处理服务器返回的数据
-
+                        alert(data);
 
                     });
                 }
@@ -216,7 +216,6 @@
                 <info-text>由26个英文字母组成,长度不限</info-text>
             </label>
             <input type="text" class="form-control" id="username" placeholder="请输入昵称" name="userName">
-
 
         </div>
         <div class="form-group" id="psw_div">

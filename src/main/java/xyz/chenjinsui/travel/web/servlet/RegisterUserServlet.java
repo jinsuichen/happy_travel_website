@@ -32,7 +32,6 @@ public class RegisterUserServlet extends HttpServlet {
         //获取数据
         Map<String, String[]> parameterMap = req.getParameterMap();
 
-
         //封装对象
         User user = new User();
         try {
@@ -57,6 +56,7 @@ public class RegisterUserServlet extends HttpServlet {
         }
         
         //将resultInfo序列化为json写回客户端
+        resp.setContentType("application/json;charset=utf-8");
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(resultInfo);
         resp.getWriter().write(json);
