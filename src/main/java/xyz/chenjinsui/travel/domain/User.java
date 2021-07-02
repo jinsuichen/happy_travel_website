@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class User {
     private String username;
-    private String psw;
+    private String password;
     private String email;
-    private String realname;
-    private String tel;
+    private String name;
+    private String telephone;
     private String gender;
     private String birthday;
     private String status; //激活状态
@@ -22,12 +22,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPsw() {
-        return psw;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPsw(String psw) {
-        this.psw = psw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -38,20 +38,20 @@ public class User {
         this.email = email;
     }
 
-    public String getRealname() {
-        return realname;
+    public String getName() {
+        return name;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTel() {
-        return tel;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getGender() {
@@ -90,10 +90,10 @@ public class User {
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
-                ", psw='" + psw + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", realname='" + realname + '\'' +
-                ", tel='" + tel + '\'' +
+                ", name='" + name + '\'' +
+                ", telephone='" + telephone + '\'' +
                 ", gender='" + gender + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", status='" + status + '\'' +

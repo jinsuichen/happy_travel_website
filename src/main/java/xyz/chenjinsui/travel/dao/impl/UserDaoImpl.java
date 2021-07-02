@@ -48,11 +48,11 @@ public class UserDaoImpl implements UserDao {
         String sql = "insert into tab_user(username, password, name, birthday, gender, telephone, email,status, code) values(?,?,?,?,?,?,?,?,?)";
         template.update(sql,
                 user.getUsername(),
-                user.getPsw(),
-                user.getRealname(),
+                user.getPassword(),
+                user.getName(),
                 user.getBirthday(),
                 user.getGender(),
-                user.getTel(),
+                user.getTelephone(),
                 user.getEmail(),
                 user.getStatus(),
                 user.getCode());

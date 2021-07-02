@@ -53,6 +53,8 @@ public class LoginServlet extends HttpServlet {
             //正常
             System.out.println(3);
             info.setFlag(true);
+            req.getSession().setAttribute("user", u);
+            System.out.println(u);
         }
 
         //debug
