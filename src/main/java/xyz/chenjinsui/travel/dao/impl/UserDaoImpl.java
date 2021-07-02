@@ -29,14 +29,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save(User user) {
+
+        //debug
+        System.out.println(user);
+
         //定义sql
-        String sql = "insert into tab_user(username, password, name, birthday,  telephone, email) values(?,?,?,?,?,?)";
+        String sql = "insert into tab_user(username, password, name, birthday, gender, telephone, email,status, code) values(?,?,?,?,?,?,?,?,?)";
         //执行sql
-        template.update(sql, user.getUserName(),
+        template.update(sql, user.getUsername(),
                 user.getPsw(),
-                user.getRealName(),
+                user.getRealname(),
                 user.getBirthday(),
+                user.getGender(),
                 user.getTel(),
-                user.getEmail());
+                user.getEmail(),
+                user.getStatus(),
+                user.getCode());
     }
 }

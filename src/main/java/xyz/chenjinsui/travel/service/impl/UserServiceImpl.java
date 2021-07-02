@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     public boolean register(User user) {
 
         //1.根据用户名查询用户对象
-        User u = userDao.findByUserName(user.getUserName());
+        User u = userDao.findByUserName(user.getUsername());
         if(u!=null){
             //用户存在，注册失败
             return false;
@@ -43,9 +43,7 @@ public class UserServiceImpl implements UserService {
         //发送激活邮件
         // TODO 部署项目时更改链接 或 抽取为配置文件
         String content = "<a href='http://localhost/travel_website_war/activeUserSer?code=" + user.getCode() + "'>点击激活【快乐旅游网】</a>";
-        System.out.println("待发送： " +user.getEmail()+" " +content);
         MailUtils.sendMail(user.getEmail(), content, "快乐旅游网-激活邮件");
-        System.out.println("============");
         return true;
 
     }

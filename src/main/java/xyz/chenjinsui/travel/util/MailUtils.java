@@ -22,11 +22,9 @@ public class MailUtils {
             final Properties props = new Properties();
             props.put("mail.smtp.auth","true");
             props.put("mail.smtp.host","smtp.163.com");
-            System.out.println("test1");
             //发件人账号和密码
             props.put("mail.user",USER);
             props.put("mail.password", PASSWORD);
-            System.out.println("test2");
 
             //构建授权信息，用于进行SMTP进行身份验证
             Authenticator authenticator = new Authenticator() {
@@ -37,7 +35,6 @@ public class MailUtils {
                     return new PasswordAuthentication(userName, password);
                 }
             };
-            System.out.println("test3");
 
             //使用环境属性和授权信息,创建邮件会话
             Session mailSession = Session.getInstance(props, authenticator);
@@ -47,7 +44,6 @@ public class MailUtils {
             String username = props.getProperty("mail.user");
             InternetAddress from = new InternetAddress(username);
             message.setFrom(from);
-            System.out.println("test4");
 
             //设置收件人
             InternetAddress toAddress = new InternetAddress(to);
@@ -58,7 +54,6 @@ public class MailUtils {
 
             //设置邮件的内容体
             message.setContent(text, "text/html;charset=UTF-8");
-            System.out.println("test5");
 
             //发送邮件
             Transport.send(message);

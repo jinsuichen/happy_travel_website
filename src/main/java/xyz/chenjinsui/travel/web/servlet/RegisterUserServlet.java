@@ -32,6 +32,12 @@ public class RegisterUserServlet extends HttpServlet {
         //获取数据
         Map<String, String[]> parameterMap = req.getParameterMap();
 
+        //debug 遍历从前端获取的表单数据
+        /*Set<String> keySet = parameterMap.keySet();
+        for(var key : keySet){
+            System.out.println(key + " : " + Arrays.toString(parameterMap.get(key)));
+        }*/
+
         //封装对象
         User user = new User();
         try {

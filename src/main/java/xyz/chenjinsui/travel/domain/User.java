@@ -4,22 +4,22 @@ import java.util.Date;
 import java.util.Objects;
 
 public class User {
-    private String userName;
+    private String username;
     private String psw;
     private String email;
-    private String realName;
+    private String realname;
     private String tel;
     private String gender;
     private String birthday;
     private String status; //激活状态
     private String code; //激活码
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPsw() {
@@ -38,12 +38,12 @@ public class User {
         this.email = email;
     }
 
-    public String getRealName() {
-        return realName;
+    public String getRealname() {
+        return realname;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 
     public String getTel() {
@@ -84,5 +84,20 @@ public class User {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", psw='" + psw + '\'' +
+                ", email='" + email + '\'' +
+                ", realname='" + realname + '\'' +
+                ", tel='" + tel + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", status='" + status + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }
