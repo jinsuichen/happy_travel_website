@@ -6,11 +6,17 @@ import xyz.chenjinsui.travel.domain.User;
 
 public interface UserService {
 
-
     /**
      * 注册用户
      * @param user
      * @return
      */
     boolean register(User user);
+
+    /**
+     * 用户激活
+     * @param code
+     * @return
+     */
+    boolean active(String code);
 }

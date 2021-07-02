@@ -27,11 +27,9 @@ public class JDBCUtils {
         }
     }
 
-
     public static Connection getConnection() throws SQLException {
         return ds.getConnection();
     }
-
 
     public static void close(ResultSet rs,Statement stmt, Connection conn){
         if(rs != null){

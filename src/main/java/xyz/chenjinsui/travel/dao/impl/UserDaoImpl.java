@@ -8,35 +8,38 @@ import xyz.chenjinsui.travel.util.JDBCUtils;
 
 public class UserDaoImpl implements UserDao {
 
-    private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+    private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
     public User findByUserName(String userName) {
         User user = null;
-
         try{
             //定义sql
             String sql = "select * from tab_user where username = ?";
             //执行sql
             user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), userName);
 
-        }catch (Exception e) {
-
+        }catch (Exception ignored) {
         }
         return user;
+    }
 
+    @Override
+    public User findByCode(String code){
+        User user = null;
+        try{
+            String sql = "select * from tab_user where code = ?";
+            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), code);
+        }catch (Exception ignored){
+        }
+        return user;
     }
 
     @Override
     public void save(User user) {
-
-        //debug
-        System.out.println(user);
-
-        //定义sql
         String sql = "insert into tab_user(username, password, name, birthday, gender, telephone, email,status, code) values(?,?,?,?,?,?,?,?,?)";
-        //执行sql
-        template.update(sql, user.getUsername(),
+        template.update(sql,
+                user.getUsername(),
                 user.getPsw(),
                 user.getRealname(),
                 user.getBirthday(),
@@ -46,4 +49,13 @@ public class UserDaoImpl implements UserDao {
                 user.getStatus(),
                 user.getCode());
     }
+
+    @Override
+    public void updateStatus(User user) {
+        String code = user.getCode();
+        String sql = "UPDATE tab_user SET status='Y' WHERE code = ?";
+        template.update(sql, code);
+    }
+
+
 }
