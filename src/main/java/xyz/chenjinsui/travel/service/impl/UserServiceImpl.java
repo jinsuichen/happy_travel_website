@@ -7,23 +7,21 @@ import xyz.chenjinsui.travel.service.UserService;
 import xyz.chenjinsui.travel.util.MailUtils;
 import xyz.chenjinsui.travel.util.UuidUtil;
 
-import java.util.Locale;
-
 public class UserServiceImpl implements UserService {
 
-    private UserDao userDao = new UserDaoImpl();
+    private final UserDao userDao = new UserDaoImpl();
 
 
     /**
      * 注册用户
-     * @param user
+     * @param user 待注册的用户
      * @return 是否成功注册
      */
     @Override
     public boolean register(User user) {
 
         //1.根据用户名查询用户对象
-        User u = userDao.findByUserName(user.getUsername());
+        User u = userDao.findByUsername(user.getUsername());
         if(u!=null){
             //用户存在，注册失败
             return false;
@@ -62,5 +60,18 @@ public class UserServiceImpl implements UserService {
         //进行激活
         userDao.updateStatus(user);
         return true;
+    }
+
+
+    /**
+     * 用户登录
+     * @param user 待登陆的用户
+     * @return 是否登陆成功
+     */
+    @Override
+    public User login(User user) {
+        User u = null;
+        u = userDao.findByUsernameAndPassword(user.getUsername(), user.getPsw());
+        return u;
     }
 }

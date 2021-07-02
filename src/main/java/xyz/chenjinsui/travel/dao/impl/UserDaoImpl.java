@@ -11,14 +11,22 @@ public class UserDaoImpl implements UserDao {
     private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
-    public User findByUserName(String userName) {
+    public User findByUsername(String username) {
         User user = null;
         try{
-            //定义sql
             String sql = "select * from tab_user where username = ?";
-            //执行sql
-            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), userName);
+            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username);
+        }catch (Exception ignored) {
+        }
+        return user;
+    }
 
+    @Override
+    public User findByUsernameAndPassword(String username, String password) {
+        User user = null;
+        try{
+            String sql = "select * from tab_user where username = ? AND password = ?";
+            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username, password);
         }catch (Exception ignored) {
         }
         return user;

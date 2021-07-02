@@ -9,7 +9,15 @@ public interface UserDao {
      * @param userName 用户名
      * @return 查询到的用户
      */
-    public User findByUserName(String userName);
+    public User findByUsername(String userName);
+
+    /**
+     * 根据用户名查询用户信息
+     * @param username 用户名
+     * @param password 密码
+     * @return 查询到的用户
+     */
+    public User findByUsernameAndPassword(String username, String password);
 
     /**
      * 根据激活码查询用户信息
