@@ -1,15 +1,15 @@
 package xyz.chenjinsui.travel.service.impl;
 
-import xyz.chenjinsui.travel.dao.UserDao;
+import xyz.chenjinsui.travel.dao.IUserDao;
 import xyz.chenjinsui.travel.dao.impl.UserDaoImpl;
 import xyz.chenjinsui.travel.domain.User;
-import xyz.chenjinsui.travel.service.UserService;
+import xyz.chenjinsui.travel.service.IUserService;
 import xyz.chenjinsui.travel.util.MailUtils;
 import xyz.chenjinsui.travel.util.UuidUtil;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
-    private final UserDao userDao = new UserDaoImpl();
+    private final IUserDao userDao = new UserDaoImpl();
 
 
     /**

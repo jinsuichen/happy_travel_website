@@ -1,10 +1,8 @@
 package xyz.chenjinsui.travel.service;
 
-import xyz.chenjinsui.travel.dao.UserDao;
-import xyz.chenjinsui.travel.dao.impl.UserDaoImpl;
 import xyz.chenjinsui.travel.domain.User;
 
-public interface UserService {
+public interface IUserService {
 
     /**
      * 注册用户

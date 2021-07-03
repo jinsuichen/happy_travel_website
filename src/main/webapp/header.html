@@ -1,9 +1,23 @@
 <script>
     $(function (){
+        //查询用户信息
         $.get("user/findOne",{},function (data){
             //{uid:1, name:'李四'}
             var msg = "欢迎回来，"+data.name;
             $("#span_username").html(msg);
+        })
+
+        //查询分类(Category)
+        $.get("category/findAll",{},function (data){
+            //[{cis:1, cname:'text'}, {}, {}, {}, {}, {}, {}, {}]
+            //var lis = '<li><a href="#">Link</a></li>';
+            var lis = '';
+            for(var i = 0; i<data.length; i++){
+                var li = '<li><a href="#">' + data[i].cname  + '</a></li>';
+                lis+=li;
+            }
+            $("#category_bar").html(lis);
+
         })
     })
 </script>
@@ -11,6 +25,51 @@
 
 <header id="header">
 
-    <span id="span_username"></span>
-    <p class="navbar-text">欢迎回来，admin</p>
+
+
+    <nav class="navbar navbar-default">
+
+        <div class="container-fluid">
+
+
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">FL</a>
+            </div>
+
+            <p id="span_username" class="navbar-text">尚未登陆，请您<a href="login.html">登陆</a></p>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="category_bar">
+                    <!--在这里动态添加分类航条-->
+                    <li><a href="#">Link</a></li>
+
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 </header>

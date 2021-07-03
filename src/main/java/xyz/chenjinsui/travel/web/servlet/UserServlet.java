@@ -4,12 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.beanutils.BeanUtils;
 import xyz.chenjinsui.travel.domain.ResultInfo;
 import xyz.chenjinsui.travel.domain.User;
-import xyz.chenjinsui.travel.service.UserService;
+import xyz.chenjinsui.travel.service.IUserService;
 import xyz.chenjinsui.travel.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,7 +19,7 @@ import java.util.Map;
 public class UserServlet extends BaseServlet {
 
 
-    private UserService service = new UserServiceImpl();
+    private final IUserService service = new UserServiceImpl();
 
     /**
      * 注册功能
@@ -32,6 +31,7 @@ public class UserServlet extends BaseServlet {
     public void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取数据
         Map<String, String[]> parameterMap = req.getParameterMap();
+
 
         //debug 遍历从前端获取的表单数据
         /*Set<String> keySet = parameterMap.keySet();
@@ -61,6 +61,9 @@ public class UserServlet extends BaseServlet {
             resultInfo.setErrorMsg("注册失败！");
         }
 
+        //TODO
+        // 1.更改返回方式
+        // 2.使用BaseServlet中的方法进行优化
         //将resultInfo序列化为json写回客户端
         resp.setContentType("application/json;charset=utf-8");
         ObjectMapper mapper = new ObjectMapper();
@@ -93,32 +96,40 @@ public class UserServlet extends BaseServlet {
         User u = service.login(user);
         ResultInfo info = new ResultInfo();
 
+        //debug
+        //为了可以在控制台上显示登录信息
+        int loginStatus = 0;
+
         //生成回写数据
         if(u == null){
             //未找到用户
-            System.out.println("1");
+            loginStatus = 1;
             info.setFlag(false);
             info.setErrorMsg("用户名或密码错误");
         } else if("N".equals(u.getStatus())){
             //未激活
-            System.out.println(2);
+            loginStatus = 2;
             info.setFlag(false);
             info.setErrorMsg("未进行激活，请进行邮箱激活");
         } else if("Y".equals(u.getStatus())){
             //正常
-            System.out.println(3);
+            loginStatus = 3;
             info.setFlag(true);
             req.getSession().setAttribute("user", u);
             System.out.println(u);
         }
 
         //debug
-        System.out.println(info.isFlag());
-        System.out.println(info.getErrorMsg());
+        //在控制台上显示登录信息
+        System.out.println("");
+        System.out.println("有用户尝试登陆：");
+        System.out.println("状态编号: " + loginStatus);
+        System.out.println("状态信息: " + info.getErrorMsg());
+        System.out.println("是否成功: " + info.isFlag());
+        System.out.println("");
 
         //回写数据
-        resp.setContentType("application/json;charset=utf-8");
-        new ObjectMapper().writeValue(resp.getOutputStream(), info);
+        writeValue(info,resp);
     }
 
 
@@ -133,12 +144,13 @@ public class UserServlet extends BaseServlet {
 
         //从Session中获取登录用户
         Object user = req.getSession().getAttribute("user");
+
+        /*//debug
         System.out.println(user);
-        System.out.println((User)user);
+        System.out.println((User)user);*/
+
         //将user写回客户端
-        ObjectMapper mapper = new ObjectMapper();
-        resp.setContentType("application/json;charset=utf-8");
-        mapper.writeValue(resp.getOutputStream(), (User)user);
+        writeValue((User)user, resp);
 
     }
 
@@ -177,6 +189,7 @@ public class UserServlet extends BaseServlet {
             }else{
                 msg = "激活失败，请联系管理员";
             }
+            //FIXME 此处可能有误
             resp.setContentType("text/html;charset=utf-8");
             resp.getWriter().write(msg);
         }

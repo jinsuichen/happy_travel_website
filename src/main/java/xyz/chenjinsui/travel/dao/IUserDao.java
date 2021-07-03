@@ -2,7 +2,7 @@ package xyz.chenjinsui.travel.dao;
 
 import xyz.chenjinsui.travel.domain.User;
 
-public interface UserDao {
+public interface IUserDao {
 
     /**
      * 根据用户名查询用户信息
@@ -12,7 +12,7 @@ public interface UserDao {
     public User findByUsername(String userName);
 
     /**
-     * 根据用户名查询用户信息
+     * 根据用户名和密码查询用户信息
      * @param username 用户名
      * @param password 密码
      * @return 查询到的用户

@@ -2,11 +2,11 @@ package xyz.chenjinsui.travel.dao.impl;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import xyz.chenjinsui.travel.dao.UserDao;
+import xyz.chenjinsui.travel.dao.IUserDao;
 import xyz.chenjinsui.travel.domain.User;
 import xyz.chenjinsui.travel.util.JDBCUtils;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements IUserDao {
 
     private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
