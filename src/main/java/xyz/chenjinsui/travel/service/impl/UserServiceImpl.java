@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
         //发送激活邮件
         // TODO 部署项目时更改链接 或 抽取为配置文件
-        String content = "<a href='http://localhost/travel_website_war/activeUserServlet?code=" + user.getCode() + "'>点击激活【快乐旅游网】</a>";
+        String content = "<a href='http://localhost/travel_website_war/user/active?code=" + user.getCode() + "'>点击激活【快乐旅游网】</a>";
         MailUtils.sendMail(user.getEmail(), content, "快乐旅游网-激活邮件");
         return true;
 

@@ -23,7 +23,7 @@
         $(function (){
 
             $("#loginForm").submit(function (){
-                $.post("loginServlet", $(this).serialize(), function (data){
+                $.post("user/login", $(this).serialize(), function (data){
                     //在回调函数中处理服务器返回的数据
                     if(data.flag){
                         location.href="index.html";
