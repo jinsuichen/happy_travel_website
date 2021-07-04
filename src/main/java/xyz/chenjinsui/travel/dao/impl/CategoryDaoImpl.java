@@ -4,13 +4,16 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import xyz.chenjinsui.travel.dao.ICategoryDao;
 import xyz.chenjinsui.travel.domain.Category;
-import xyz.chenjinsui.travel.util.JDBCUtils;
+import xyz.chenjinsui.travel.util.JdbcUtils;
 
 import java.util.List;
 
+/**
+ * @author FengLing
+ */
 public class CategoryDaoImpl implements ICategoryDao {
 
-    private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+    private final JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
 
     @Override
     public List<Category> findAll() {

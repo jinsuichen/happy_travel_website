@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+/**
+ * @author FengLing
+ */
 @WebFilter("/*")
 public class CharacterFilter implements Filter {
     @Override

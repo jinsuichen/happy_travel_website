@@ -4,11 +4,14 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import xyz.chenjinsui.travel.dao.IUserDao;
 import xyz.chenjinsui.travel.domain.User;
-import xyz.chenjinsui.travel.util.JDBCUtils;
+import xyz.chenjinsui.travel.util.JdbcUtils;
 
+/**
+ * @author FengLing
+ */
 public class UserDaoImpl implements IUserDao {
 
-    private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+    private final JdbcTemplate template = new JdbcTemplate(JdbcUtils.getDataSource());
 
     @Override
     public User findByUsername(String username) {

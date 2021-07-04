@@ -2,6 +2,7 @@ package xyz.chenjinsui.travel.web.servlet;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import xyz.chenjinsui.travel.domain.Category;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class BaseServlet extends HttpServlet {
 
@@ -20,12 +22,6 @@ public class BaseServlet extends HttpServlet {
         String methodName = uri.substring(uri.lastIndexOf('/') + 1);
 
         try{
-
-            /*//忽略访问权限修饰符获取方法
-            Method method = this.getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
-
-            //暴力反射
-            method.setAccessible(true);  */
 
             Method method = this.getClass().getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 

@@ -2,11 +2,27 @@ package xyz.chenjinsui.travel.domain;
 
 import java.io.Serializable;
 
+/**
+ * @author FengLing
+ */
 public class ResultInfo implements Serializable {
 
-    private boolean flag; // 后端返回结果正常为true，不正常为false
-    private Object data; // 后端返回的信息
-    private String errorMsg; // 发生异常的错误信息
+    /**
+     * 后端返回结果正常为true，不正常为false
+     */
+    private boolean flag;
+
+
+    /**
+     * 后端返回的信息
+     */
+    private Object data;
+
+
+    /**
+     * 发生异常的错误信息
+     */
+    private String errorMsg;
 
 
     // 无参构造

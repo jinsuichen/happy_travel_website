@@ -2,6 +2,9 @@ package xyz.chenjinsui.travel.dao;
 
 import xyz.chenjinsui.travel.domain.User;
 
+/**
+ * @author FengLing
+ */
 public interface IUserDao {
 
     /**

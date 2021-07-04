@@ -5,6 +5,7 @@ import java.util.UUID;
 
 /**
  * 生成全球唯一的字符
+ * @author FengLing
  */
 public final class UuidUtil {
     private UuidUtil(){}

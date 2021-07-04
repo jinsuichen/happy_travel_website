@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author FengLing
+ */
 @WebServlet("/category/*")
 public class CategoryServlet extends BaseServlet {
 
@@ -27,7 +30,6 @@ public class CategoryServlet extends BaseServlet {
      */
     public void findAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Category> list = categoryService.findAll();
-
         writeValue(list, resp);
     }
 }

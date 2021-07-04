@@ -5,9 +5,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
+/**
+ * 发送邮件的工具类
+ * @author FengLing
+ */
 public class MailUtils {
-    private static final String USER = "fengling_bot@163.com"; //发件人称号 同邮件地址
-    private static final String PASSWORD = "OWLONLVNYCLGJGZN"; //客户端授权码
+
+    /**
+     * 发件人称号 同邮件地址
+     */
+    private static final String USER = "fengling_bot@163.com";
+    /**
+     * 客户端授权码
+     */
+    private static final String PASSWORD = "OWLONLVNYCLGJGZN";
 
     /**
      * 发送邮件

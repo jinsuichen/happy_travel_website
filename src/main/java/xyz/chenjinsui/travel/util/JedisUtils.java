@@ -4,6 +4,9 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+/**
+ * @author FengLing
+ */
 public class JedisUtils {
 
     private static JedisPool jedisPool;

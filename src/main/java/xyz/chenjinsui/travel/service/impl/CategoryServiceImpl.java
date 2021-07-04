@@ -1,6 +1,7 @@
 package xyz.chenjinsui.travel.service.impl;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Tuple;
 import xyz.chenjinsui.travel.dao.ICategoryDao;
 import xyz.chenjinsui.travel.dao.impl.CategoryDaoImpl;
 import xyz.chenjinsui.travel.domain.Category;
@@ -24,7 +25,8 @@ public class CategoryServiceImpl implements ICategoryService {
         //从redis中查询
         Jedis jedis = JedisUtils.getJedis();
 
-        Set<String> categories = jedis.zrange("category", 0, -1);
+        //查询cid和cname
+        Set<Tuple> categories = jedis.zrangeWithScores("category", 0, -1);
         List<Category> cs = null; //待返回的数据
 
         if(categories == null || categories.size() == 0){
@@ -37,9 +39,10 @@ public class CategoryServiceImpl implements ICategoryService {
         }else{
             //若有数据，将查询到的set转换为list
             cs = new ArrayList<Category>();
-            for (String name : categories) {
+            for (Tuple t : categories) {
                 Category c = new Category();
-                c.setCname(name);
+                c.setCname(t.getElement());
+                c.setCid((int) t.getScore());
                 cs.add(c);
             }
         }

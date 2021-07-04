@@ -3,6 +3,9 @@ package xyz.chenjinsui.travel.domain;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * @author FengLing
+ */
 public class User {
     private String username;
     private String password;
@@ -11,8 +14,18 @@ public class User {
     private String telephone;
     private String gender;
     private String birthday;
-    private String status; //激活状态
-    private String code; //激活码
+
+    /**
+     * 激活状态
+     * 为'Y'时已激活，为'N'时未激活
+     */
+    private String status;
+
+    /**
+     * 激活码
+     * 32为的唯一字符串，用于激活
+     */
+    private String code;
 
     public String getUsername() {
         return username;

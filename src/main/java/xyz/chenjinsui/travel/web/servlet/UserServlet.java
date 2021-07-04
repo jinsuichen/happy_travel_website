@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+/**
+ * @author FengLing
+ */
 @WebServlet("/user/*")
 public class UserServlet extends BaseServlet {
 
