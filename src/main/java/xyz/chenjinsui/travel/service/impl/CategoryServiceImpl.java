@@ -17,6 +17,10 @@ public class CategoryServiceImpl implements ICategoryService {
 
     private final ICategoryDao categoryDao  = new CategoryDaoImpl();
 
+    /**
+     * 查询所有分类
+     * @return 所有Category分类组成一个列表
+     */
     @Override
     public List<Category> findAll() {
 
