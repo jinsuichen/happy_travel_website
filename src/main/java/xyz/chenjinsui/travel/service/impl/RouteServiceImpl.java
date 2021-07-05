@@ -13,17 +13,18 @@ public class RouteServiceImpl implements IRouteService {
     IRouteDao routeDao = new RouteDaoImpl();
 
     @Override
-    public PageBean<Route> pageQuery(int cid, int currentPage, int pageSize) {
+    public PageBean<Route> pageQuery(int cid, int currentPage, int pageSize, String rname) {
+
         PageBean<Route> pb = new PageBean<Route>();
         pb.setCurrentPage(currentPage);
         pb.setPageSize(pageSize);
-        int totalCount = routeDao.findTotalCount(cid);
+        int totalCount = routeDao.findTotalCount(cid, rname);
         pb.setTotalCount(totalCount);
 
 
         //当前页显示的数据集合
         int start = (currentPage - 1) * pageSize;
-        List<Route> list = routeDao.findByPage(cid, start, pageSize);
+        List<Route> list = routeDao.findByPage(cid, start, pageSize, rname);
         pb.setList(list);
 
         //设置总页数
@@ -33,4 +34,6 @@ public class RouteServiceImpl implements IRouteService {
         return  pb;
 
     }
+
+
 }

@@ -165,19 +165,20 @@
         // 入口函数
         $(function () {
 
+
+
             // 点击提交按钮时
             $("#registerForm").submit(function () {
-
                 if (checkUsername() && checkPassword() && checkRepassword() && checkTel()
                     && checkRealName() && checkEmail() && checkBirthday()) {
-
                     //此处使用serialize将表单进行序列化，处理为字符串
-                    $.post("user/register", $(this).serialize(), function (data){
-                        //在回调函数中处理服务器返回的数据
-                        location.href='goto_mail.html';
-
+                    $.post("user/register", $(this).serialize(), function(data){
+                        if(data.flag){
+                            location.href="goto_mail.html";
+                        }
                     });
                 }
+                return false;
             })
 
             // 各个输入框离焦时进行表单检验

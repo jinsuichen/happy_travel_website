@@ -21,9 +21,6 @@
 
     <script>
 
-        function test() {
-            alert("test");
-        }
 
         function getQueryVariable(variable) {
             var query = window.location.search.substring(1);
@@ -38,16 +35,17 @@
         }
 
 
-        function load(cid, currentPage) {
+        function load(cid, currentPage, rname) {
             //发送ajax请求，请求route、pageQuery，传递cid
-            $.get("route/pageQuery", {cid: cid, currentPage: currentPage}, function (pb) {
+            $.get("route/pageQuery", {cid: cid, currentPage: currentPage, rname:rname}, function (pb) {
                 //解析pageBean数据，展示到页面上
 
-                //分页工具条
+                //分页工具条(共x条，共x页)
                 $("#totalPage").html(pb.totalPage);
                 $("#totalCount").html(pb.totalCount);
 
 
+                //获取分页栏信息
                 var begin;
                 var end;
                 if (pb.totalPage < 10) {
@@ -60,7 +58,6 @@
                         begin = 1;
                         end = 10;
                     }
-
                     if (end > pb.totalPage) {
                         end = pb.totalPage;
                         begin = end - 9;
@@ -68,7 +65,7 @@
                 }
 
                 //TODO 实现 上一页 下一页 功能
-
+                //分页栏展示
                 var lis = "";
                 lis += "<li>\n" +
                     "            <a href=\"#\" aria-label=\"Previous\">\n" +
@@ -77,8 +74,8 @@
                     "        </li>";
 
                 for (var i = begin; i <= end; i++) {
-                    var li = "<li><a href='javascript:load(" + cid + "," + i + ")'>" + i + "</a></li>";
-                    if(i === pb.currentPage) li = "<li class='active'><a href='javascript:load(" + cid + "," + i + ")'>" + i + "</a></li>";
+                    var li = "<li><a href='javascript:load(" + cid + "," + i + "," + rname +")'>" + i + "</a></li>";
+                    if (i === pb.currentPage) li = "<li class='active'><a href='javascript:load(" + cid + "," + i + "," + rname + ")'>" + i + "</a></li>";
                     lis += li;
                 }
                 lis += "<li>\n" +
@@ -89,18 +86,6 @@
                 $("#pageNum").html(lis);
 
                 //列表数据展示
-                /*
-
-                <li class="list-group-item">
-                    <div class="jumbotron">
-                        <h1>Hello, world!</h1>
-                        <p></p>
-
-                    </div>
-                </li>
-
-                 */
-
                 var route_lis = "";
                 for (var i = 0; i < pb.list.length; i++) {
                     var route = pb.list[i];
@@ -115,6 +100,7 @@
                 }
                 $("#route_body").html(route_lis);
 
+                //滚动至顶部
                 window.scrollTo(0, 0);
 
 
@@ -122,10 +108,13 @@
         }
 
         $(function () {
-            var search = location.search;
             var cid = getQueryVariable("cid");
-
-            load(cid)
+            var rname = getQueryVariable("rname");
+            load(cid, null, null);
+            $('#search_btn').click(function () {
+                var text = $("#search_text").val();
+                location.href = "route_list.html?cid=" + cid + "&rname=" + text;
+            })
 
 
         })
@@ -133,46 +122,39 @@
 </head>
 <body>
 
+<!--引入头部-->
+<div id="header"></div>
+
+
 <div class="container">
 
-    <div>
-        <ul class="list-group" id="route_body">
-            <li class="list-group-item">
+    <div class="row">&nbsp;</div>
 
+    <div class="row">
+        <span>
+            <label for="search_text">查找旅游路线</label>
+            <input type="text" class="form-control" id="search_text" placeholder="请输入内容">
+        </span>
+
+        <span><button type="button" class="btn btn-default" id="search_btn">搜索</button></span>
+
+    </div>
+
+
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+
+
+    <div class="row">
+        <ul class="list-group" id="route_body">
+            <!--example-->
+            <!--<li class="list-group-item">
                 <div class="jumbotron">
                     <h1>Hello, world!</h1>
                     <p>...</p>
                     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
                 </div>
-            </li>
-            <li class="list-group-item">
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                    <p>...</p>
-                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                    <p>...</p>
-                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                    <p>...</p>
-                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                    <p>...</p>
-                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-                </div>
-            </li>
+            </li>-->
         </ul>
 
 
@@ -180,26 +162,24 @@
 
         <nav aria-label="Page navigation">
             <ul class="pagination" id="pageNum">
-                <li>
+                <!--<li>
                     <a href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
+                </li>-->
+                <!--example-->
+                <!--<li><a href="#">1</a></li>-->
+                <!--<li>
                     <a href="#" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
-                </li>
+                </li>-->
             </ul>
         </nav>
 
     </div>
 </div>
+
 
 </body>
 </html>
