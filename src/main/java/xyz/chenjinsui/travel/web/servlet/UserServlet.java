@@ -64,14 +64,8 @@ public class UserServlet extends BaseServlet {
             resultInfo.setErrorMsg("注册失败！");
         }
 
-        //TODO
-        // 1.更改返回方式
-        // 2.使用BaseServlet中的方法进行优化
-        //将resultInfo序列化为json写回客户端
-        resp.setContentType("application/json;charset=utf-8");
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(resultInfo);
-        resp.getWriter().write(json);
+        writeValue(resultInfo, resp);
+
     }
 
 

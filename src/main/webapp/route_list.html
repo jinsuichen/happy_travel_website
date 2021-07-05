@@ -1,19 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>路线展示</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/include.js"></script>
+
+    <script>
+
+        function test() {
+            alert("test");
+        }
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] === variable) {
+                    return pair[1];
+                }
+            }
+            return false;
+        }
+
+
+        function load(cid, currentPage) {
+            //发送ajax请求，请求route、pageQuery，传递cid
+            $.get("route/pageQuery", {cid: cid, currentPage: currentPage}, function (pb) {
+                //解析pageBean数据，展示到页面上
+
+                //分页工具条
+                $("#totalPage").html(pb.totalPage);
+                $("#totalCount").html(pb.totalCount);
+
+
+                var begin;
+                var end;
+                if (pb.totalPage < 10) {
+                    bengin = 1;
+                    end = pb.totalPage;
+                } else {
+                    begin = pb.currentPage - 5;
+                    end = pb.currentPage + 4;
+                    if (begin < 1) {
+                        begin = 1;
+                        end = 10;
+                    }
+
+                    if (end > pb.totalPage) {
+                        end = pb.totalPage;
+                        begin = end - 9;
+                    }
+                }
+
+                //TODO 实现 上一页 下一页 功能
+
+                var lis = "";
+                lis += "<li>\n" +
+                    "            <a href=\"#\" aria-label=\"Previous\">\n" +
+                    "                <span aria-hidden=\"true\">&laquo;</span>\n" +
+                    "            </a>\n" +
+                    "        </li>";
+
+                for (var i = begin; i <= end; i++) {
+                    var li = "<li><a href='javascript:load(" + cid + "," + i + ")'>" + i + "</a></li>";
+                    if(i === pb.currentPage) li = "<li class='active'><a href='javascript:load(" + cid + "," + i + ")'>" + i + "</a></li>";
+                    lis += li;
+                }
+                lis += "<li>\n" +
+                    "            <a href=\"#\" aria-label=\"Next\">\n" +
+                    "                <span aria-hidden=\"true\">&raquo;</span>\n" +
+                    "            </a>\n" +
+                    "        </li>";
+                $("#pageNum").html(lis);
+
+                //列表数据展示
+                /*
+
+                <li class="list-group-item">
+                    <div class="jumbotron">
+                        <h1>Hello, world!</h1>
+                        <p></p>
+
+                    </div>
+                </li>
+
+                 */
+
+                var route_lis = "";
+                for (var i = 0; i < pb.list.length; i++) {
+                    var route = pb.list[i];
+                    route_lis += "<li class=\"list-group-item\">\n" +
+                        "                    <div class=\"jumbotron\">\n" +
+                        "                        <h1>" + route.rname + "</h1>\n" +
+                        "                        <p>" + route.routeIntroduce + "</p>\n" +
+                        "      \n" +
+                        "                    </div>\n" +
+                        "                </li>";
+
+                }
+                $("#route_body").html(route_lis);
+
+                window.scrollTo(0, 0);
+
+
+            })
+        }
+
+        $(function () {
+            var search = location.search;
+            var cid = getQueryVariable("cid");
+
+            load(cid)
+
+
+        })
+    </script>
 </head>
 <body>
+
+<div class="container">
+
+    <div>
+        <ul class="list-group" id="route_body">
+            <li class="list-group-item">
+
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                </div>
+            </li>
+        </ul>
+
+
+        <div>共<span id="totalCount"></span>条，共<span id="totalPage"></span>页</div>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination" id="pageNum">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</div>
 
 </body>
 </html>
 
 
-<script>
-
-    $(function (){
-        var search = location.search;
-        var cid = search.split("=")[1];
-    })
-</script>
