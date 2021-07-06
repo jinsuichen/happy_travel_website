@@ -31,7 +31,7 @@
                     return pair[1];
                 }
             }
-            return false;
+            return null;
         }
 
 
@@ -49,7 +49,7 @@
                 var begin;
                 var end;
                 if (pb.totalPage < 10) {
-                    bengin = 1;
+                    begin = 1;
                     end = pb.totalPage;
                 } else {
                     begin = pb.currentPage - 5;
@@ -73,7 +73,12 @@
                     "            </a>\n" +
                     "        </li>";
 
+                if (rname == null) rname = "null";
+                else rname = '"' + rname + '"';
+
                 for (var i = begin; i <= end; i++) {
+
+
                     var li = "<li><a href='javascript:load(" + cid + "," + i + "," + rname +")'>" + i + "</a></li>";
                     if (i === pb.currentPage) li = "<li class='active'><a href='javascript:load(" + cid + "," + i + "," + rname + ")'>" + i + "</a></li>";
                     lis += li;
@@ -109,14 +114,19 @@
 
         $(function () {
             var cid = getQueryVariable("cid");
+            var currentPage = getQueryVariable("currentPage");
             var rname = getQueryVariable("rname");
-            load(cid, null, null);
+            load(cid, 1, rname);
+
+            //test
+            /*alert(cid);
+            alert(currentPage);
+            alert(rname);*/
+
             $('#search_btn').click(function () {
                 var text = $("#search_text").val();
-                location.href = "route_list.html?cid=" + cid + "&rname=" + text;
+                location.href = "route_list.html?cid=" + cid + "&currentPage="+ currentPage +"&rname=" + text;
             })
-
-
         })
     </script>
 </head>
@@ -124,7 +134,6 @@
 
 <!--引入头部-->
 <div id="header"></div>
-
 
 <div class="container">
 
@@ -160,6 +169,7 @@
 
         <div>共<span id="totalCount"></span>条，共<span id="totalPage"></span>页</div>
 
+        <!--分页栏-->
         <nav aria-label="Page navigation">
             <ul class="pagination" id="pageNum">
                 <!--<li>

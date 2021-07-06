@@ -25,15 +25,21 @@ public class RouteServlet extends BaseServlet{
 
     /**
      * 分页查询
+     * @param req 从request中获取cid、pageSize、currentPage、rname
+     * @param resp 回写一个PageBean对象
      */
     public void pageQuery(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //获得数据
         String cidStr = req.getParameter("cid");
         String pageSizeStr = req.getParameter("pageSize");
         String currentPageStr = req.getParameter("currentPage");
         String rname = req.getParameter("rname");
+        System.out.println("===============");
+        System.out.println(rname);
+        System.out.println("===============");
 
-
+        //处理数据
         int cid = 0;
         int currentPage = 0;
         int pageSize = 0;
@@ -57,8 +63,11 @@ public class RouteServlet extends BaseServlet{
             pageSize = 5;
         }
 
+
+        //回写数据
         PageBean<Route> routePageBean = routeService.pageQuery(cid, currentPage, pageSize, rname);
         writeValue(routePageBean, resp);
+        //test
         System.out.println(routePageBean);
 
 

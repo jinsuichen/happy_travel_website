@@ -17,7 +17,7 @@ public class StringUtils {
 
     public static void main(String[] args) {
 
-        String str = "%E5%AE%89";
+        String str = "%E5%8D%97";
         try {
             System.out.println(StringUtils.decode(str));
         } catch (UnsupportedEncodingException e) {

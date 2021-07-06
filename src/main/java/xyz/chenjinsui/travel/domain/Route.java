@@ -4,24 +4,24 @@ package xyz.chenjinsui.travel.domain;
  * @author FengLing
  */
 public class Route {
-    private int rid;
+    private Integer rid;
     private String rname;
-    private double price;
+    private Double price;
     private String routeIntroduce;
-    private int rflag;
+    private Integer rflag;
     private String rdate;
-    private int isThemeTour;
-    private int count;
-    private int cid;
+    private Integer isThemeTour;
+    private Integer count;
+    private Integer cid;
     private String rimage;
-    private int sid;
-    private int sourcedId;
+    private Integer sid;
+    private Integer sourcedId;
 
-    public int getRid() {
+    public Integer getRid() {
         return rid;
     }
 
-    public void setRid(int rid) {
+    public void setRid(Integer rid) {
         this.rid = rid;
     }
 
@@ -33,11 +33,11 @@ public class Route {
         this.rname = rname;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -49,11 +49,11 @@ public class Route {
         this.routeIntroduce = routeIntroduce;
     }
 
-    public int getRflag() {
+    public Integer getRflag() {
         return rflag;
     }
 
-    public void setRflag(int rflag) {
+    public void setRflag(Integer rflag) {
         this.rflag = rflag;
     }
 
@@ -65,27 +65,27 @@ public class Route {
         this.rdate = rdate;
     }
 
-    public int getIsThemeTour() {
+    public Integer getIsThemeTour() {
         return isThemeTour;
     }
 
-    public void setIsThemeTour(int isThemeTour) {
+    public void setIsThemeTour(Integer isThemeTour) {
         this.isThemeTour = isThemeTour;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 
@@ -97,19 +97,19 @@ public class Route {
         this.rimage = rimage;
     }
 
-    public int getSid() {
+    public Integer getSid() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(Integer sid) {
         this.sid = sid;
     }
 
-    public int getSourcedId() {
+    public Integer getSourcedId() {
         return sourcedId;
     }
 
-    public void setSourcedId(int sourcedId) {
+    public void setSourcedId(Integer sourcedId) {
         this.sourcedId = sourcedId;
     }
 

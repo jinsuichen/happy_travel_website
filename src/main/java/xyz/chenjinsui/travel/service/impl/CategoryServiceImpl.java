@@ -52,6 +52,7 @@ public class CategoryServiceImpl implements ICategoryService {
         }
 
 
+
         jedis.close();
         return cs;
     }

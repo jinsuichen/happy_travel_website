@@ -31,7 +31,7 @@ public class RouteServiceImpl implements IRouteService {
         int totalPage = totalCount % pageSize == 0 ? totalCount/pageSize : totalCount/pageSize+1;
         pb.setTotalPage(totalPage);
 
-        return  pb;
+        return pb;
 
     }
 
