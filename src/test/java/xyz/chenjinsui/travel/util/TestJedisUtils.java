@@ -7,9 +7,11 @@ import static org.junit.Assert.assertEquals;
 
 public class TestJedisUtils {
     @Test
-    public void test(){
+    public void testGetJedis(){
         Jedis jedis = JedisUtils.getJedis();
-        jedis.set("Hello", "world");
-        assertEquals("world", jedis.get("Hello"));
+        jedis.set("HelloTest", "world");
+        assertEquals("world", jedis.get("HelloTest"));
+        jedis.del("HelloTests");
+        jedis.close();
     }
 }

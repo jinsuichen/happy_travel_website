@@ -5,7 +5,7 @@ import xyz.chenjinsui.travel.dao.impl.UserDaoImpl;
 import xyz.chenjinsui.travel.domain.User;
 import xyz.chenjinsui.travel.service.IUserService;
 import xyz.chenjinsui.travel.util.MailUtils;
-import xyz.chenjinsui.travel.util.UuidUtil;
+import xyz.chenjinsui.travel.util.UuidUtils;
 
 public class UserServiceImpl implements IUserService {
 
@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUserService {
         }
 
         //设置为一激活码
-        user.setCode(UuidUtil.getUuid());
+        user.setCode(UuidUtils.getUuid());
 
         //设置激活状态(未激活)
         user.setStatus("N");
