@@ -1,9 +1,12 @@
 package xyz.chenjinsui.travel.domain;
 
+import java.util.List;
+
 /**
  * @author FengLing
  */
 public class Route {
+
     private Integer rid;
     private String rname;
     private Double price;
@@ -16,6 +19,10 @@ public class Route {
     private String rimage;
     private Integer sid;
     private Integer sourcedId;
+
+    private Category category;
+    private Seller seller;
+    private List<RouteImg> routeImgList;
 
     public Integer getRid() {
         return rid;
@@ -113,6 +120,30 @@ public class Route {
         this.sourcedId = sourcedId;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public List<RouteImg> getRouteImgList() {
+        return routeImgList;
+    }
+
+    public void setRouteImgList(List<RouteImg> routeImgList) {
+        this.routeImgList = routeImgList;
+    }
+
     @Override
     public String toString() {
         return "Route{" +
@@ -128,6 +159,9 @@ public class Route {
                 ", rimage='" + rimage + '\'' +
                 ", sid=" + sid +
                 ", sourcedId=" + sourcedId +
+                ", category=" + category +
+                ", seller=" + seller +
+                ", routeImgList=" + routeImgList +
                 '}';
     }
 }
